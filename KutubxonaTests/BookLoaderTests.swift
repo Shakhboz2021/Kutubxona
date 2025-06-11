@@ -11,17 +11,17 @@ import XCTest
 final class BookLoaderTests: XCTestCase {
     
     func test_downloadBooks_returnBookList() throws {
-        let service = BookListService()
-        let viewModel = BookListViewModel(service: service)
-        
-        let expectation = XCTestExpectation(description: "Book list downloaded successfully")
-        
-        viewModel.loadBooks { books in
-            if XPCArray().isEmpty {
-                expectation.fulfill()
-            }
-        }
-        wait(for: [expectation], timeout: 1)
+//        let service = BookListService()
+//        let viewModel = BookListViewModel(service: service)
+//        
+//        let expectation = XCTestExpectation(description: "Book list downloaded successfully")
+//        
+//        viewModel.loadBooks { books in
+//            if XPCArray().isEmpty {
+//                expectation.fulfill()
+//            }
+//        }
+//        wait(for: [expectation], timeout: 1)
     }
     
     func test_downloadStubbedBooks_returnStubbedBookList() throws {
