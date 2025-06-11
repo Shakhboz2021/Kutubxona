@@ -31,7 +31,7 @@ final class RemoteBooksLoaderTests: XCTestCase {
         let url = URL(string: "https://a-URL.com")!
         let (_, client) = makeSUT(url: url)
 
-        XCTAssertNil(client.requestURL)
+        XCTAssertTrue(client.requestURLs.isEmpty)
     }
 
     // Given -> When -> Then(assertion)
@@ -40,6 +40,16 @@ final class RemoteBooksLoaderTests: XCTestCase {
         let (sut, client) = makeSUT(url: url)
 
         sut.load()
+        XCTAssertEqual(client.requestURLs, [url])
+    }
+    
+    func test_loadTwice_requestsDataFromURLTwice() {
+        let url = URL(string: "https://given-URL.com")!
+        let (sut, client) = makeSUT(url: url)
+
+        sut.load()
+        sut.load()
+        XCTAssertEqual(client.requestURLs, [url, url])
     }
 
     // MARK: - Helpers
@@ -51,9 +61,9 @@ final class RemoteBooksLoaderTests: XCTestCase {
         return (sut, client)
     }
     class HTTPClientSpy: HTTPClient {
-        var requestURL: URL?
+        var requestURLs: [URL] = []
         func get(from url: URL) {
-            self.requestURL = url
+            self.requestURLs.append(url)
         }
     }
 }
