@@ -24,7 +24,7 @@ class HTTPClient {
 final class RemoteBooksLoaderTests: XCTestCase {
     func test_init_doesNotRequestDataFromURL() {
         let client = HTTPClient()
-        let loader = RemoteBooksLoader(client: client)
+        _ = RemoteBooksLoader(client: client)
 
         XCTAssertNil(client.requestURL)
     }
