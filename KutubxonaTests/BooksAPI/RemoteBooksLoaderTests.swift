@@ -13,24 +13,33 @@ class RemoteBooksLoader {
         self.client = client
     }
     func load() {
-        client.requestURL = URL(string: "https://a-URL.com")
+        client.get(from: URL(string: "https://a-URL.com")!)
     }
 }
 
 class HTTPClient {
+    func get(from url: URL) {
+        
+    }
+}
+
+class HTTPClientSpy: HTTPClient {
     var requestURL: URL?
+    override func get(from url: URL) {
+        self.requestURL = url
+    }
 }
 
 final class RemoteBooksLoaderTests: XCTestCase {
     func test_init_doesNotRequestDataFromURL() {
-        let client = HTTPClient()
+        let client = HTTPClientSpy()
         _ = RemoteBooksLoader(client: client)
 
         XCTAssertNil(client.requestURL)
     }
 
     func test_load_requestsDataFromURL() {
-        let client = HTTPClient()
+        let client = HTTPClientSpy()
         let loader = RemoteBooksLoader(client: client)
 
         loader.load()
