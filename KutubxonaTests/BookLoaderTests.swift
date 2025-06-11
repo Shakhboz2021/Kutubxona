@@ -7,12 +7,7 @@
 
 import XCTest
 @testable import Kutubxona
-/*
- Booklist
- download
- show
- Bookloader
- */
+
 final class BookLoaderTests: XCTestCase {
     
     func test_downloadBooks_returnBookList() throws {
