@@ -17,15 +17,13 @@ class RemoteBooksLoader {
     }
 }
 
-class HTTPClient {
-    func get(from url: URL) {
-        
-    }
+protocol HTTPClient {
+    func get(from url: URL)
 }
 
 class HTTPClientSpy: HTTPClient {
     var requestURL: URL?
-    override func get(from url: URL) {
+    func get(from url: URL) {
         self.requestURL = url
     }
 }
@@ -47,4 +45,3 @@ final class RemoteBooksLoaderTests: XCTestCase {
         XCTAssertNotNil(client.requestURL)
     }
 }
-
